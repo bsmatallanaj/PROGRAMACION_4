@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Libros</title>
+    {% load static %}
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            color: #444;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #0078d7;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        li div {
+            display: flex;
+            flex-direction: column;
+        }
+
+        li div span {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        li a {
+            color: #0078d7;
+            text-decoration: none;
+            margin-left: 15px;
+            font-weight: bold;
+        }
+
+        li a:hover {
+            text-decoration: underline;
+        }
+
+        .add-link, .logout-link {
+            display: block;
+            text-align: center;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            margin-bottom: 15px;
+        }
+
+        .add-link {
+            background-color: #0078d7;
+            color: white;
+        }
+
+        .add-link:hover {
+            background-color: #005a9e;
+        }
+
+        .logout-link {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .logout-link:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>BIBLIOTECA DE BRAYAN</h1>
+    </header>
+
+    <div class="container">
+        <!-- Enlace de añadir un nuevo libro -->
+        <a href="{% url 'crear_libro' %}" class="add-link">Añadir Nuevo Libro</a>
+
+        <!-- Mostrar la lista de libros -->
+        <ul>
+            {% for libro in libros %}
+                <li>
+                    <div>
+                        <span>{{ libro.titulo }}</span>
+                        <small>{{ libro.autor }}</small>
+                    </div>
+                    <div>
+                        <a href="{% url 'editar_libro' libro.pk %}">Editar</a>
+                        <a href="{% url 'eliminar_libro' libro.pk %}">Eliminar</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <!-- Enlace de cerrar sesión -->
+        <a href="{% url 'logout' %}" class="logout-link">Cerrar sesión</a>
+    </div>
+</body>
+</html>

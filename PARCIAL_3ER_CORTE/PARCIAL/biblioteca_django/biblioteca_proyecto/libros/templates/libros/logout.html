@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cerrar Sesión</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #eef2f7;
+            color: #444;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #0078d7; /* Azul */
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        button {
+            padding: 12px;
+            background-color: #f44336; /* Rojo para el cierre de sesión */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e53935; /* Rojo oscuro */
+        }
+
+        a {
+            color: #0078d7; /* Azul */
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .actions {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Has cerrado sesión</h1>
+        <p>¡Hasta luego! Has cerrado sesión exitosamente.</p>
+
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Cerrar sesión</button>
+        </form>
+
+        <div class="actions">
+            <a href="{% url 'login' %}">Iniciar sesión nuevamente</a> o 
+            <a href="/">Regresar al inicio</a>.
+        </div>
+    </div>
+</body>
+</html>
